@@ -32,7 +32,6 @@
 					<!-- ここから上を編集する必要はありません -->
 
 					<!-- ここにモックのform要素を貼り付けます -->
-
 					<form method="post" action="login.html" th:action="@{/insert}"
 						th:object="${insertAdministratorForm}">
 						<fieldset>
@@ -59,13 +58,15 @@
 										<label for="mailAddress">
 											メールアドレス:
 										</label>
+										<div class="alert alert-danger" th:if="${errorMessage}">
+			                        <span th:text="${errorMessage}"></span>
+			                    </div>
 										<label th:if="${#fields.hasErrors('mailAddress')}" th:errors="*{mailAddress}" class="error-messages">
 											メールアドレスを入力してください
 										</label>
-										<input type="text" name="mailAddress" id="mailAddress" class="form-control" placeholder="yamada@mail.com"
-											 th:field="*{mailAddress}" th:errorclass="error-input" value="yamada@mail.com">
-									</div>
+										<input type="text" name="mailAddress" id="mailAddress" class="form-control" placeholder="yamada@mail.com">
 								</div>
+							</div>
 							</div>
 							<!-- パスワード -->
 							<div class="form-group">
