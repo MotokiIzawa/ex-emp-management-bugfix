@@ -63,6 +63,9 @@
 				<form method="post" action="../employee/list.html" th:action="@{/employee/findByNameLike}">
 					従業員検索<input type="text" name="name" id="name" class="active"></input>
 					<button class="btn btn-primary">検索</button>
+					<div class="alert alert-danger" th:if="${errorMessage}">
+						<span th:text="${errorMessage}">1件もありませんでした</span>
+					</div>
 				</form>
 
 				<table class="table table-striped">
