@@ -71,7 +71,7 @@ public class AdministratorController {
 	 * @return ログイン画面へリダイレクト
 	 */
 	@RequestMapping("/insert")
-	public String insert(InsertAdministratorForm form, String mailAddress) {
+	public String insert(InsertAdministratorForm form, String mailAddress,Model model) {
 		Administrator administratorForCheck = administratorService.findByMailAddress(mailAddress);
 		if (administratorForCheck == null) {
 			Administrator administrator = new Administrator();
@@ -80,6 +80,7 @@ public class AdministratorController {
 			administratorService.insert(administrator);
 			return "employee/list";
 		}
+		model.addAttribute("errorMessage","メールアドレスが重複しています");
 		return toInsert();
 	}
 
