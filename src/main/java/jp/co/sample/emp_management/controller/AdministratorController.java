@@ -73,26 +73,22 @@ public class AdministratorController {
 	 * @return ログイン画面へリダイレクト
 	 */
 	@RequestMapping("/insert")
-<<<<<<< HEAD
-	public String insert(InsertAdministratorForm form, String mailAddress,Model model) {
+
+	public String insert(@Validated InsertAdministratorForm form, BindingResult result, String password,
+			String confirmPassword, String mailAddress, Model model, Errors errors) {
 		Administrator administratorForCheck = administratorService.findByMailAddress(mailAddress);
-		if (administratorForCheck == null) {
-=======
-	public String insert(InsertAdministratorForm form, String password, String confirmPassword, Errors errors) {
-		if (password.equals(confirmPassword)) {
->>>>>>> develop
+		if (!(administratorForCheck == null)) {
+			model.addAttribute("errorMessage", "メールアドレスが重複しています");
+			return toInsert();
+		} else if (password.equals(confirmPassword)) {
 			Administrator administrator = new Administrator();
 			// フォームからドメインにプロパティ値をコピー
 			BeanUtils.copyProperties(form, administrator);
 			administratorService.insert(administrator);
 			return "employee/list";
 		}
-<<<<<<< HEAD
-		model.addAttribute("errorMessage","メールアドレスが重複しています");
-=======
 		errors.rejectValue("password", "PasswordEqualsValidator.InsertAdministratorForm.password",
 				"パスワードと確認用パスワードが一致していません");
->>>>>>> develop
 		return toInsert();
 	}
 
